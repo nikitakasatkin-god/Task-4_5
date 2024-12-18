@@ -1,14 +1,98 @@
 package com.example.task4_5;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class HelloController {
+    public ConcreteIterator iter = new ConcreteIterator("img", "src/main/resources");
+
+    public Timeline time = new Timeline();
+
+    private boolean isPlaying = false;
     @FXML
-    private Label welcomeText;
+    private Button startStopButton;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private ImageView screen;
+
+    @FXML
+    private TextField delayField;
+
+    public void initialize() {
+        iter.setBasePath("src/main/resources/img");
+
+        // Установка количества повторений
+        time.setCycleCount(Timeline.INDEFINITE);
+        updateTimeline(1000);
+
+        screen.setPreserveRatio(false);
+    }
+
+    // Обработчик события для показа кадров
+    private class EvHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            screen.setImage((Image) iter.next());
+        }
+    }
+
+    @FXML
+    public void toggleAnimation() {
+        if (isPlaying) {
+            time.pause();
+            startStopButton.setText("Играть");
+        } else {
+            startStopButton.setText("Остановить");
+            time.play();
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Метод для обновления временной шкалы с новой задержкой
+    @FXML
+    public void updateDelay() {
+        int newDelay = Integer.parseInt(delayField.getText());
+        updateTimeline(newDelay);
+    }
+
+    // Метод для обновления временной шкалы
+    private void updateTimeline(int delayMillis) {
+        time.stop();
+        time.getKeyFrames().clear();
+        time.getKeyFrames().add(new KeyFrame(Duration.millis(delayMillis), new EvHandler()));
+        if (isPlaying) {
+            time.play(); // возобновляем
+        }
+    }
+
+    @FXML
+    public void next() {
+        screen.setImage((Image) iter.next());
+    }
+
+    @FXML
+    public void preview(){
+        screen.setImage((Image) iter.preview());
+    }
+
+    @FXML
+    public void setImgFolder() {
+        iter.setBasePath("src/main/resources/img");
+        screen.setImage((Image) iter.next()); // Обновляем изображение на экране
+    }
+
+    @FXML
+    public void setImg1Folder() {
+        iter.setBasePath("src/main/resources/img1");
+        screen.setImage((Image) iter.next()); // Обновляем изображение на экране
     }
 }
