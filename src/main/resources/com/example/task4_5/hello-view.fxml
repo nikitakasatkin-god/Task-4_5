@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.task4_5.HelloController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task4_5.HelloController">
   <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
+  <children>
+    <ImageView fx:id="screen" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+    </ImageView>
+    <VBox prefHeight="200.0" prefWidth="100.0">
+      <children>
+        <HBox prefHeight="29.0" prefWidth="460.0">
+          <children>
+            <Button onAction="#preview" text="Назад" />
+            <Button onAction="#next" text="Вперед">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </Button>
+            <Button fx:id="startStopButton" onAction="#toggleAnimation" text="Играть/Остановить">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox prefHeight="28.0" prefWidth="460.0">
+          <children>
+            <Label text="Введите задержку слайд шоу:" />
+            <TextField fx:id="delayField">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </TextField>
+            <Button onAction="#updateDelay" text="Применить">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Button onAction="#setImgFolder" text="Папка 1" />
+            <Button onAction="#setImg1Folder" text="Папка 2">
+              <HBox.margin>
+                <Insets left="10.0" />
+              </HBox.margin>
+            </Button>
+          </children>
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
 </VBox>
