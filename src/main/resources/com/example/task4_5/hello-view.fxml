@@ -13,13 +13,13 @@
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
   </padding>
-  <Label text="Indicator Example"/>
+  <Label text="Индикатор"/>
   <HBox spacing="10.0" alignment="CENTER">
-    <Label text="Start:"/>
+    <Label text="Начало:"/>
     <Label fx:id="startField" text="1"/>
-    <Label text="Stop:"/>
+    <Label text="Конец:"/>
     <Label fx:id="stopField" text="0"/>
-    <Label text="Measure:"/>
+    <Label text="Текущее положение:"/>
     <Label fx:id="measureField" text="0"/>
   </HBox>
 
